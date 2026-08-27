@@ -1,4 +1,24 @@
 services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    volumes:
+      - ~/homeassistant:/config
+    network_mode: host
+
+  esphome:
+    image: ghcr.io/esphome/esphome
+    container_name: esphome
+    restart: always
+    privileged: true
+    network_mode: host
+    volumes:
+      - ~/esphome:/config
+      
   whisper:
     container_name: whisper
     image: rhasspy/wyoming-whisper
